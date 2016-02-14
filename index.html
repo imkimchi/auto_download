@@ -1,9 +1,21 @@
 <html>
 <head>
+	<meta charset="UTF-8">
 	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script src="./jquery.xdomainajax.js"></script>
+	<style>
+	a {
+		display: none;
+	}
+	button {
+		width: 100%;
+		height: 100%;
+		font-size: 4em;
+	}
+	</style>
 </head>
 <body>
+<button>다-운 로ㅡ드~ 우흥</button>
 	<script>
 	$.ajax({
 		url:'http://ropas.snu.ac.kr/~kwang/4190.310/mooc/',
@@ -12,7 +24,7 @@
 		success:function(data){
 			result2 = data.responseText;
 			links = $(result2).find("ul:nth-child(2n) li a");
-			local = "http://localhost:8080/file%20download%20all/";
+			local = "http://localhost:8080/file%20download%20all/auto_download/";
 			target = "http://ropas.snu.ac.kr/~kwang/4190.310/mooc/";
 			sex = [];
 			for(var i=0; i<links.length; i++){
@@ -22,13 +34,15 @@
 					$('a').attr('class', 's');
 			}		
 			$(document).ready(function() {
+			
+				$('button').click(function(){
 				for(var i=0; i<links.length; i++){
-					$('.s').click();
-				}
+					$('.s')[i].click();
+					console.log('download');
+				}});
 				
-			});
-		}
-	});
+				})
+			}});
 	</script>
 
 </body>
