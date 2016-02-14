@@ -1,0 +1,34 @@
+<html>
+<head>
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="./jquery.xdomainajax.js"></script>
+</head>
+<body>
+	<script>
+	$.ajax({
+		url:'http://ropas.snu.ac.kr/~kwang/4190.310/mooc/',
+		type:"GET",
+		dataType: 'html',
+		success:function(data){
+			result2 = data.responseText;
+			links = $(result2).find("ul:nth-child(2n) li a");
+			local = "http://localhost:8080/file%20download%20all/";
+			target = "http://ropas.snu.ac.kr/~kwang/4190.310/mooc/";
+			sex = [];
+			for(var i=0; i<links.length; i++){
+					links[i].href = links[i].href.replace(local, target);
+					$('body').append(links[i]);
+					$('a').attr('download', '');
+					$('a').attr('class', 's');
+			}		
+			$(document).ready(function() {
+				for(var i=0; i<links.length; i++){
+					$('.s').click();
+				}
+				
+			});
+		}
+	});
+	</script>
+
+</body>
